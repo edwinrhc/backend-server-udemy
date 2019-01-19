@@ -9,7 +9,7 @@ var SEED = require('../config/config').SEED;
 exports.verificaToken = function( req, res, next ) {
 
     
-    var token = req.query.toke;
+    var token = req.query.token;
     //  si tenemos el token en la mano necesito
 
     jwt.verify( token, SEED, ( err, decoded ) => {
@@ -17,7 +17,7 @@ exports.verificaToken = function( req, res, next ) {
         if( err) {
             return res.status(401).json({
                 ok: false,
-                mensaje: 'Toke incorrecto',
+                mensaje: 'Token incorrecto',
                 errors: err
             });
         }
