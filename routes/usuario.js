@@ -77,7 +77,7 @@ app.put('/:id', mdAutenticacion.verificaToken , (req,res) => {
         }
 
         usuario.nombre = body.nombre;
-        usuario.correo = body.correo;
+        usuario.email = body.email;
         usuario.role = body.role;
 
         usuario.save( (err, usuarioGuardado) => {
@@ -113,7 +113,7 @@ app.post('/', mdAutenticacion.verificaToken ,(req, res) => {
     var usuario = new Usuario({
 
         nombre: body.nombre,
-        correo: body.correo,
+        email: body.email,
         password: bcrypt.hashSync(body.password,10),
         img: body.img,
         role: body.role
