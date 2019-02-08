@@ -164,7 +164,7 @@ function subirPorTipo(tipo, id, nombreArchivo, res) {
 
                     ok: true,
                     mensaje: 'Imagen de medico actualizado',
-                    usuario: medicoActualizado
+                    medico: medicoActualizado
 
                 });
 

@@ -79,7 +79,8 @@ app.post('/google', async (req, res) => {
                     ok: true,
                     usuario: usuarioBD,
                     token: token,
-                    id: usuarioBD.id
+                    id: usuarioBD.id,
+                 menu: obtenerMenu(usuarioBD.role)
                 });
 
             }
@@ -104,30 +105,15 @@ app.post('/google', async (req, res) => {
                     ok: true,
                     usuario: usuarioBD,
                     token: token,
-                    id: usuarioBD.id
+                    id: usuarioBD.id,
+                    menu: obtenerMenu(usuarioBD.role)
                 });
 
             });
         }
     });
 
-
-
-    // return res.status(200).json({
-    //     ok: true,
-    //     mensaje: 'Ok',
-    //     googleUser: googleUser
-
-    // });
-
-
-
 })
-
-
-
-
-
 
 // =========================================
 //  Autencación Normal
@@ -183,7 +169,8 @@ app.post('/', (req, res) => {
             ok: true,
             usuario: usuarioBD,
             token: token,
-            id: usuarioBD.id
+            id: usuarioBD.id,
+            menu: obtenerMenu(usuarioBD.role)
         });
 
     });
@@ -191,5 +178,44 @@ app.post('/', (req, res) => {
 
 
 });
+
+function obtenerMenu(ROLE) {
+
+    var menu =  [
+        {
+          titulo: 'Principal',
+          icono: 'mdi mdi-gauge',
+          submenu: [
+            { titulo: 'Dashboard', url: '/dashboard' },
+            { titulo: 'ProgressBar', url: '/progress' },
+            { titulo: 'Gráficas', url: '/graficas1' },
+            { titulo: 'Promesas', url: '/promesas' },
+            { titulo: 'Rxjs', url: '/rxjs' }
+          ]
+    
+        },
+        {
+    
+          titulo: 'Mantenimiento',
+          icono: 'mdi mdi-folder-look-open',
+          submenu: [
+    
+            // { titulo: 'Usuarios', url: '/usuarios'},
+            { titulo: 'Hospitales', url: '/hospitales' },
+            { titulo: 'Médicos', url: '/medicos'}
+          ]
+    
+        }
+      ];
+    
+
+      console.log('ROLE',ROLE);
+      if ( ROLE === 'ADMIN_ROLE') {
+
+        menu[1].submenu.unshift( { titulo: 'Usuarios', url: '/usuarios'});
+      }
+
+    return menu;
+}
 
 module.exports = app;
